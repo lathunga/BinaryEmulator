@@ -424,7 +424,7 @@ int doDump(struct machineState* machineState)
        printf(" %lld\n", machineState->program[j].c1);
      }
    }
-   printf("%s %d\n         %s %d\n        %s %d", "Extra:\n Instructions executed:", machineState->length, "Loads issued:", machineState->loads, "Stores issued:", machineState->stores);
+   printf("%s %d\n         %s %d\n        %s %d\n", "Extra:\n Instructions executed:", machineState->length, "Loads issued:", machineState->loads, "Stores issued:", machineState->stores);
    machineState->count++;
    return machineState->count;
 }
