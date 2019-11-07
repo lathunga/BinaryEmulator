@@ -463,7 +463,7 @@ int doStur(struct machineState* machineState)
    {
      if(machineState->registers[28]+8<=machineState->registers[29])
      {
-       machineState->stack[(machineState->registers[29]/8-1) - machineState->instruction.c1] = machineState->registers[machineState->instruction.c4];
+       machineState->stack[(machineState->registers[29]/8-1) - (machineState->instruction.c1/8)] = machineState->registers[machineState->instruction.c4];
      }
      else
      {
