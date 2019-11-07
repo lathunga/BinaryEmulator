@@ -310,7 +310,7 @@ int doDump(struct machineState* machineState)
        }
      }
 
-   hexdump((int8_t*) stackEightBit, 512);
+   hexdump(stackEightBit, 512);
    printf("\n");
    hexdump(mainMemoryEightBit, 4096);
 
