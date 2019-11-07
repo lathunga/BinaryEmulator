@@ -553,7 +553,7 @@ int doB_cond(struct machineState* machineState)
 
 int doCbnz(struct machineState* machineState)
 {
-  if(machineState->instruction.c4 != 0)
+  if(machineState->registers[machineState->instruction.c4] != 0)
   {
     machineState->count = machineState->instruction.c1 + machineState->count;
     return machineState->count;
@@ -567,7 +567,7 @@ int doCbnz(struct machineState* machineState)
 
 int doCbz(struct machineState* machineState)
 {
-  if(machineState->instruction.c4 == 0)
+  if(machineState->registers[machineState->instruction.c4] == 0)
   {
     machineState->count = machineState->instruction.c1 + machineState->count;
     return machineState->count;
