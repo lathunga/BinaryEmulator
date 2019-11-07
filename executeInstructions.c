@@ -385,7 +385,7 @@ int doDump(struct machineState* machineState)
      {
        if(machineState->program[j].type==36 || machineState->program[j].type==37)
        {
-         printf("  %s %s%lld, %lld\n", machineState->program[j].name, "X", machineState.program[j].c4, achineState->program[j].c1);
+         printf("  %s %s%lld, %lld\n", machineState->program[j].name, "X", machineState->program[j].c4, machineState->program[j].c1);
        }
        else
        {
