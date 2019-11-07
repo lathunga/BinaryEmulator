@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
   machineState->count = 0;
   machineState->loads = 0;
   machineState->stores = 0;
+  machineState->instructionsExecuted = 0;
   while(machineState->count<length)
   {
     machineState->instruction = machineState->program[machineState->count];

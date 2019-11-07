@@ -51,5 +51,7 @@ struct machineState
   int loads;
 
   int stores;
+
+  int instructionsExecuted;
 };
 #endif

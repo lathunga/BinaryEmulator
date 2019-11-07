@@ -76,6 +76,7 @@ int doAddi(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] + machineState->instruction.c1;
   machineState->count++;
+  machineState->instructionsExecuted++;
   return machineState->count;
 }
 /*initial testing*/
@@ -83,6 +84,7 @@ int doAndi(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] & machineState->instruction.c1;
   machineState->count++;
+  machineState->instructionsExecuted++;
   return machineState->count;
 }
 /*initial testing*/
@@ -90,6 +92,7 @@ int doEori(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] ^ machineState->instruction.c1;
   machineState->count++;
+  machineState->instructionsExecuted++;
   return machineState->count;
 }
 /*initial testing*/
@@ -97,6 +100,7 @@ int doOrri(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] | machineState->instruction.c1;
   machineState->count++;
+  machineState->instructionsExecuted++;
   return machineState->count;
 }
 /*initial testing*/
@@ -104,6 +108,7 @@ int doSubi(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] - machineState->instruction.c1;
   machineState->count++;
+  machineState->instructionsExecuted++;
   return machineState->count;
 }
 /*Not tested (problem with given emulator?)*/
@@ -149,6 +154,7 @@ int doSubis(struct machineState* machineState)
   machineState->vc = 0;
   machineState->vs = 0;
   machineState->count++;
+  machineState->instructionsExecuted++;
   return machineState->count;
 }
 
@@ -156,6 +162,7 @@ int doAdd(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] + machineState->registers[machineState->instruction.c1];
   machineState->count++;
+  machineState->instructionsExecuted++;
   return machineState->count;
 }
 
@@ -163,12 +170,14 @@ int doAnd(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] & machineState->registers[machineState->instruction.c1];
   machineState->count++;
+  machineState->instructionsExecuted++;
   return machineState->count;
 }
 
 int doBr(struct machineState* machineState)
 {
   machineState->count = machineState->registers[30]+1;
+  machineState->instructionsExecuted++;
   return machineState->count;
 }
 
@@ -176,6 +185,7 @@ int doEor(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] ^ machineState->registers[machineState->instruction.c1];
    machineState->count++;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
@@ -183,6 +193,7 @@ int doLsl(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] << machineState->instruction.c2;
    machineState->count++;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
@@ -190,6 +201,7 @@ int doLsr(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] >> machineState->instruction.c2;
    machineState->count++;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
@@ -197,6 +209,7 @@ int doMul(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] * machineState->registers[machineState->instruction.c1];
    machineState->count++;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
@@ -204,6 +217,7 @@ int doOrr(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] | machineState->registers[machineState->instruction.c1];
    machineState->count++;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
@@ -211,6 +225,7 @@ int doSub(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] - machineState->registers[machineState->instruction.c1];
    machineState->count++;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
@@ -256,6 +271,7 @@ int doSubs(struct machineState* machineState)
    machineState->vc = 0;
    machineState->vs = 0;
    machineState->count++;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
@@ -268,6 +284,7 @@ int doUdiv(struct machineState* machineState)
   }
   machineState->registers[machineState->instruction.c4] = quotient;
   machineState->count++;
+  machineState->instructionsExecuted++;
   return machineState->count;
 }
 
@@ -441,11 +458,13 @@ int doDump(struct machineState* machineState)
    }
    printf("\n%s %d\n         %s %d\n        %s %d\n", "Extra:\n Instructions executed:", machineState->length, "Loads issued:", machineState->loads, "Stores issued:", machineState->stores);
    machineState->count++;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
 void doHalt(struct machineState* machineState)
 {
+    machineState->instructionsExecuted++;
    doDump(machineState);
    exit(1);
 }
@@ -454,6 +473,7 @@ int doPrnl(struct machineState* machineState)
 {
    printf("\n");
    machineState->count++;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
@@ -461,6 +481,7 @@ int doPrnt(struct machineState* machineState)
 {
    printf("\n%c%lld%s%x%s%lld%c", 'X', machineState->instruction.c4, ": hex(", machineState->registers[machineState->instruction.c4], ")   decimal(", machineState->registers[machineState->instruction.c4], ')');
    machineState->count++;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
@@ -483,6 +504,7 @@ int doLdur(struct machineState* machineState)
   }
   machineState->count++;
   machineState->loads++;
+  machineState->instructionsExecuted++;
   return machineState->count;
 }
 
@@ -505,12 +527,14 @@ int doStur(struct machineState* machineState)
    }
    machineState->count++;
    machineState->stores++;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
 int doB(struct machineState* machineState)
 {
    machineState->count = machineState->instruction.c1 + machineState->count;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
@@ -518,11 +542,13 @@ int doBl(struct machineState* machineState)
 {
    machineState->registers[30] = machineState->count;
    machineState->count = machineState->instruction.c1 + machineState->count;
+   machineState->instructionsExecuted++;
    return machineState->count;
 }
 
 int doB_cond(struct machineState* machineState)
 {
+  machineState->instructionsExecuted++;
    switch(machineState->instruction.c4)
    {
      case 0:
@@ -562,11 +588,13 @@ int doCbnz(struct machineState* machineState)
 {
   if(machineState->registers[machineState->instruction.c4] != 0)
   {
+    machineState->instructionsExecuted++;
     machineState->count = machineState->instruction.c1 + machineState->count;
     return machineState->count;
   }
   else
   {
+    machineState->instructionsExecuted++;
     machineState->count++;
     return machineState->count;
   }
@@ -576,11 +604,13 @@ int doCbz(struct machineState* machineState)
 {
   if(machineState->registers[machineState->instruction.c4] == 0)
   {
+    machineState->instructionsExecuted++;
     machineState->count = machineState->instruction.c1 + machineState->count;
     return machineState->count;
   }
   else
   {
+    machineState->instructionsExecuted++;
     machineState->count++;
     return machineState->count;
   }
