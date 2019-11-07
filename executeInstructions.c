@@ -464,7 +464,6 @@ int doDump(struct machineState* machineState)
 
 void doHalt(struct machineState* machineState)
 {
-    machineState->instructionsExecuted++;
    doDump(machineState);
    exit(1);
 }
