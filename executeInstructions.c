@@ -46,7 +46,7 @@ int doInstruction(struct machineState* machineState)
 
    case 21: return doDump(machineState);
 
-   case 22: doHalt(machineState);
+   case 22: return doHalt(machineState);
 
    case 23: return doPrnl(machineState);
 
