@@ -50,4 +50,6 @@ int main(int argc, char *argv[])
     machineState->instruction = machineState->program[machineState->count];
     machineState->count = doInstruction(machineState);
   }
+  printf("Statistics:");
+  printf("  \n%s %d", "Number of cycles required on an unpipelined implementation: ", machineState->instructionsExecuted);
 }
