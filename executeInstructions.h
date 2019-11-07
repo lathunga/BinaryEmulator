@@ -31,7 +31,7 @@ int doSub(struct machineState* machineState);
 int doSubs(struct machineState* machineState);
 int doUdiv(struct machineState* machineState);
 int doDump(struct machineState* machineState);
-void doHalt(struct machineState* machineState);
+int doHalt(struct machineState* machineState);
 int doPrnl(struct machineState* machineState);
 int doPrnt(struct machineState* machineState);
 

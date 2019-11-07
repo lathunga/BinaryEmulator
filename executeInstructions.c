@@ -462,10 +462,10 @@ int doDump(struct machineState* machineState)
    return machineState->count;
 }
 
-void doHalt(struct machineState* machineState)
+int doHalt(struct machineState* machineState)
 {
    doDump(machineState);
-   exit(1);
+   return -1;
 }
 
 int doPrnl(struct machineState* machineState)
