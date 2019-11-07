@@ -387,53 +387,56 @@ int doDump(struct machineState* machineState)
        {
          printf("  %s %lld", machineState->program[j].name, machineState->program[j].c1);
        }
-       printf("  %s", machineState->program[j].name);
-       switch(machineState->program[j].c4)
+       else
        {
-         case 0:
-           printf("EQ");
-           break;
-         case 1:
-           printf("NE");
-           break;
-         case 2:
-           printf("HS");
-           break;
-         case 3:
-           printf("LO");
-           break;
-         case 4:
-           printf("MI");
-           break;
-         case 5:
-           printf("PL");
-           break;
-         case 6:
-           printf("VS");
-           break;
-         case 7:
-           printf("VC");
-           break;
-         case 8:
-           printf("HI");
-           break;
-         case 9:
-           printf("LS");
-           break;
-         case 10:
-           printf("GE");
-           break;
-         case 11:
-           printf("LT");
-           break;
-         case 12:
-           printf("GT");
-           break;
-         case 13:
-           printf("LE");
-           break;
+         printf("  %s", machineState->program[j].name);
+         switch(machineState->program[j].c4)
+         {
+           case 0:
+             printf("EQ");
+             break;
+           case 1:
+             printf("NE");
+             break;
+           case 2:
+             printf("HS");
+             break;
+           case 3:
+             printf("LO");
+             break;
+           case 4:
+             printf("MI");
+             break;
+           case 5:
+             printf("PL");
+             break;
+           case 6:
+             printf("VS");
+             break;
+           case 7:
+             printf("VC");
+             break;
+           case 8:
+             printf("HI");
+             break;
+           case 9:
+             printf("LS");
+             break;
+           case 10:
+             printf("GE");
+             break;
+           case 11:
+             printf("LT");
+             break;
+           case 12:
+             printf("GT");
+             break;
+           case 13:
+             printf("LE");
+             break;
+         }
+         printf(" %lld\n", machineState->program[j].c1);
        }
-       printf(" %lld\n", machineState->program[j].c1);
      }
    }
    printf("\n%s %d\n         %s %d\n        %s %d\n", "Extra:\n Instructions executed:", machineState->length, "Loads issued:", machineState->loads, "Stores issued:", machineState->stores);
