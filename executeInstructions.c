@@ -283,6 +283,8 @@ int doDump(struct machineState* machineState)
    unsigned long long mask1 = ((1 << 8) - 1);
    unsigned long long mask2;
    int64_t shifted;
+   if(!is_bigendian())
+   {
      for(mainMemoryIndex=0; mainMemoryIndex<512; mainMemoryIndex++)
      {
        for(currentBit = 56; currentBit>=0; currentBit=currentBit-8)
@@ -309,10 +311,16 @@ int doDump(struct machineState* machineState)
          eightBitIndex++;
        }
      }
-
-   hexdump(stackEightBit, 512);
-   printf("\n");
-   hexdump(mainMemoryEightBit, 4096);
+     hexdump(stackEightBit, 512);
+     printf("\n");
+     hexdump(mainMemoryEightBit, 4096);
+   }
+   else
+   {
+     hexdump((int8_t*)machineState->stack, 512);
+     printf("\n");
+     hexdump((int8_t*)machineState->mainMemory, 4096);
+   }
 
    int j;
    for(j=0; j<machineState->length; j++)
