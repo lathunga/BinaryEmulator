@@ -459,10 +459,24 @@ int doPrnt(struct machineState* machineState)
 
 int doLdur(struct machineState* machineState)
 {
-   machineState->registers[machineState->instruction.c4] = machineState->mainMemory[machineState->instruction.c3 + machineState->instruction.c1];
-   machineState->count++;
-   machineState->loads++;
-   return machineState->count;
+  if(machineState->instruction.c3 == 28)
+  {
+    if(machineState->registers[28]+machineState->instruction.c1<=machineState->registers[29])
+    {
+      machineState->registers[machineState->instruction.c4] = machineState->stack[(machineState->registers[28]/8) + (machineState->instruction.c1/8)];
+    }
+    else
+    {
+      fprintf(stderr, "%s", "Stack out of bounds.");
+    }
+  }
+  else
+  {
+    machineState->registers[machineState->instruction.c4] = machineState->mainMemory[(machineState->instruction.c1 + machineState->registers[machineState->instruction.c3])/8];
+  }
+  machineState->count++;
+  machineState->loads++;
+  return machineState->count;
 }
 
 int doStur(struct machineState* machineState)
