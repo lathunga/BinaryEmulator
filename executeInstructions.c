@@ -383,6 +383,10 @@ int doDump(struct machineState* machineState)
      }
      else if(machineState->program[j].format==5)
      {
+       if(machineState->program[j].type==36 || machineState->program[j].type==37)
+       {
+         printf("  %s %lld", machineState->program[j].name, machineState->program[j].c1);
+       }
        printf("  %s", machineState->program[j].name);
        switch(machineState->program[j].c4)
        {
@@ -432,7 +436,7 @@ int doDump(struct machineState* machineState)
        printf(" %lld\n", machineState->program[j].c1);
      }
    }
-   printf("%s %d\n         %s %d\n        %s %d\n", "Extra:\n Instructions executed:", machineState->length, "Loads issued:", machineState->loads, "Stores issued:", machineState->stores);
+   printf("\n%s %d\n         %s %d\n        %s %d\n", "Extra:\n Instructions executed:", machineState->length, "Loads issued:", machineState->loads, "Stores issued:", machineState->stores);
    machineState->count++;
    return machineState->count;
 }
