@@ -688,7 +688,8 @@ void hexdump(int8_t *start, size_t size)
 
 int shiftStages(struct machineState* machineState)
 {
-  if(machineState->count == machineState->length && machineState->stages[0].type==0 && machineState->stages[1].type==0 && machineState->stages[2].type==0 && machineState->stages[3].type==0 && machineState->stages[4].type==0)
+  int stall = 0;
+  if((machineState->count == machineState->length || machineState->count == -1) && machineState->stages[0].type==0 && machineState->stages[1].type==0 && machineState->stages[2].type==0 && machineState->stages[3].type==0 && machineState->stages[4].type==0)
   {
     return 0;
   }
@@ -708,62 +709,48 @@ int shiftStages(struct machineState* machineState)
   }
   if(machineState->stages[1].type!=0)
   {
-    if(machineState->stages[4].type==25 || machineState->stages[4].format==1 || machineState->stages[4].format==2)
+    if(machineState->stages[3].type==25 || machineState->stages[3].format==1 || machineState->stages[3].format==2)
     {
-      if(machineState->stages[1].format==4)
+      if( (machineState->stages[1].format==1 || machineState->stages[1].format==3) && (machineState->stages[1].c2==machineState->stages[3].c4 || machineState->stages[1].c1==machineState->stages[3].c4) )
       {
-        machineState->stages[3] = machineState->stages[1];
-        machineState->stages[1].type = 0;
+        stall = 1;
       }
-      else if( (machineState->stages[1].format==1 || machineState->stages[1].format==3) && (machineState->stages[1].c2!=machineState->stages[4].c4 && machineState->stages[1].c1!=machineState->stages[4].c4) )
+      else if( ( machineState->stages[1].format==2) && (machineState->stages[1].c2==machineState->stages[3].c4))
       {
-        machineState->stages[3] = machineState->stages[2];
-        machineState->stages[1].type = 0;
+        stall = 1;
       }
-      else if( ( machineState->stages[1].format==2) && (machineState->stages[1].c2!=machineState->stages[4].c4))
+      else if( (machineState->stages[1].format==5) && (machineState->stages[1].c4==machineState->stages[3].c4) )
       {
-        machineState->stages[3] = machineState->stages[2];
-        machineState->stages[2].type = 0;
-      }
-      else if( (machineState->stages[1].format==5) && (machineState->stages[1].c4!=machineState->stages[4].c4) )
-      {
-        machineState->stages[3] = machineState->stages[1];
-        machineState->stages[1].type = 0;
+        stall = 1;
       }
     }
-    else if(machineState->stages[3].type==25 || machineState->stages[3].format==1 || machineState->stages[3].format==2)
+    else if(machineState->stages[2].type==25 || machineState->stages[2].format==1 || machineState->stages[2].format==2)
     {
-      if(machineState->stages[1].format==4)
+      if( (machineState->stages[1].format==1 || machineState->stages[1].format==3) && (machineState->stages[1].c2==machineState->stages[2].c4 || machineState->stages[1].c1==machineState->stages[2].c4) )
       {
-        machineState->stages[3] = machineState->stages[2];
-        machineState->stages[1].type = 0;
+        stall = 1;
       }
-      else if( (machineState->stages[1].format==1 || machineState->stages[1].format==3) && (machineState->stages[1].c2!=machineState->stages[3].c4 && machineState->stages[1].c1!=machineState->stages[3].c4) )
+      else if( ( machineState->stages[1].format==2) && (machineState->stages[1].c2==machineState->stages[2].c4))
       {
-        machineState->stages[3] = machineState->stages[1];
-        machineState->stages[1].type = 0;
+        stall = 1;
       }
-      else if( ( machineState->stages[1].format==2) && (machineState->stages[1].c2!=machineState->stages[3].c4))
+      else if( (machineState->stages[1].format==5) && (machineState->stages[1].c4==machineState->stages[2].c4) )
       {
-        machineState->stages[3] = machineState->stages[1];
-        machineState->stages[1].type = 0;
+        stall = 1;
       }
-      else if( (machineState->stages[1].format==5) && (machineState->stages[1].c4!=machineState->stages[3].c4) )
+      if(stall==0)
       {
-        machineState->stages[3] = machineState->stages[1];
+        machineState->stages[1] = machineState->stages[1];
         machineState->stages[1].type = 0;
       }
     }
   }
-  if(machineState->stages[0].type!=0 && machineState->stages[1].type==0)
+  if(machineState->stages[0].type!=0)
   {
     machineState->stages[1] = machineState->stages[0];
     machineState->stages[0].type = 0;
   }
-  if(machineState->stages[0].type==0)
-  {
-    machineState->stages[0] = machineState->instruction;
-  }
+  machineState->stages[0] = machineState->instruction;
   machineState->unpipelinedCycles++;
   return 1;
 }
