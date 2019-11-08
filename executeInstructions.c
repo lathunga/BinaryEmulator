@@ -747,14 +747,18 @@ int shiftStages(struct machineState* machineState)
   }
   if(machineState->stages[0].type!=0 && machineState->stages[1].type==0)
   {
+
     machineState->stages[1] = machineState->stages[0];
     machineState->stages[0].type = 0;
+  }
+  if(machineState->stages[0].type==0)
+  {
+    machineState->stages[0] = machineState->instruction;
+    machineState->unpipelinedCycles++;
   }
   else
   {
     shiftStages(machineState);
   }
-  machineState->stages[0] = machineState->instruction;
-  machineState->unpipelinedCycles++;
   return 1;
 }

@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
   }
   while(shiftStages(machineState)==1)
   {
-    
+
   }
   printf("Statistics:");
   printf("  \n%s %d", "Number of cycles required on an unpipelined implementation: ", machineState->instructionsExecuted);
