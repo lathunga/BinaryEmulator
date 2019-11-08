@@ -8,6 +8,7 @@
 void hexdump(int8_t *start, size_t size);
 char printable_char(uint8_t c);
 int branchIf(int flag, struct machineState* machineState);
+void shiftStages(struct machineState* machineState);
 
 int doInstruction(struct machineState* machineState);
 

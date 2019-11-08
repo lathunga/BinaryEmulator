@@ -34,7 +34,9 @@ int main(int argc, char *argv[])
       addToStruct(buffer[j], program, j);
   }
 
+  struct instruction stages[5] = {0};
   struct machineState* machineState = malloc(sizeof(struct machineState));
+  machineState->stages = stages;
   machineState->registers = registers;
   machineState->mainMemory = mainMemory;
   machineState->stack = stack;
@@ -50,6 +52,11 @@ int main(int argc, char *argv[])
     machineState->instruction = machineState->program[machineState->count];
     machineState->count = doInstruction(machineState);
   }
+  if(machineState->stages[0].type!=0)
+  {
+    machineState->unpipelinedCycles+=5;
+  }
   printf("Statistics:");
   printf("  \n%s %d", "Number of cycles required on an unpipelined implementation: ", machineState->instructionsExecuted);
+  printf("  \n%s %d", "Number of cycles required on a pipelined implementation without bypassing or branch prediction: ", machineState->instructionsExecuted);
 }

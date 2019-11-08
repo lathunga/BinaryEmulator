@@ -45,6 +45,7 @@ struct machineState
 
   struct instruction* program;
   struct instruction instruction;
+  struct instruction* stages;
 
   uint32_t* buffer;
 
@@ -53,5 +54,7 @@ struct machineState
   int stores;
 
   int instructionsExecuted;
+
+  int unpipelinedCycles;
 };
 #endif
