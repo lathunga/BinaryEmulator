@@ -691,7 +691,6 @@ void shiftStages(struct machineState* machineState)
   if(machineState->stages[4].type!=0)
   {
     machineState->stages[4].type = 0;
-    machineState->unpipelinedCycles++;
   }
   if(machineState->stages[3].type!=0)
   {
@@ -752,7 +751,7 @@ void shiftStages(struct machineState* machineState)
       }
     }
   }
-  if(machineState->stages[1].type==0)
+  if(machineState->stages[0].type!=0 && machineState->stages[1].type==0)
   {
     machineState->stages[1] = machineState->stages[0];
     machineState->stages[0].type = 0;
@@ -761,4 +760,5 @@ void shiftStages(struct machineState* machineState)
   {
     machineState->stages[0] = machineState->instruction;
   }
+  machineState->unpipelinedCycles++;
 }
