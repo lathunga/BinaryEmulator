@@ -52,25 +52,9 @@ int main(int argc, char *argv[])
     machineState->instruction = machineState->program[machineState->count];
     machineState->count = doInstruction(machineState);
   }
-  if(machineState->stages[0].type!=0)
+  while(shiftStages(machineState)==1)
   {
-    machineState->unpipelinedCycles+=5;
-  }
-  else if(machineState->stages[1].type!=0)
-  {
-    machineState->unpipelinedCycles+=4;
-  }
-  else if(machineState->stages[2].type!=0)
-  {
-    machineState->unpipelinedCycles+=3;
-  }
-  else if(machineState->stages[3].type!=0)
-  {
-    machineState->unpipelinedCycles+=2;
-  }
-  else if(machineState->stages[4].type!=0)
-  {
-    machineState->unpipelinedCycles+=1;
+    
   }
   printf("Statistics:");
   printf("  \n%s %d", "Number of cycles required on an unpipelined implementation: ", machineState->instructionsExecuted);

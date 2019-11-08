@@ -686,8 +686,12 @@ void hexdump(int8_t *start, size_t size)
    printf("%08x\n", (int32_t) size);
 }
 
-void shiftStages(struct machineState* machineState)
+int shiftStages(struct machineState* machineState)
 {
+  if(machineState->count == machineState->length && machineState->stages[0].type==0 && machineState->stages[1].type==0 && machineState->stages[2].type==0 && machineState->stages[3].type==0 && machineState->stages[4].type==0)
+  {
+    return 0;
+  }
   if(machineState->stages[4].type!=0)
   {
     machineState->stages[4].type = 0;
@@ -761,4 +765,5 @@ void shiftStages(struct machineState* machineState)
     machineState->stages[0] = machineState->instruction;
   }
   machineState->unpipelinedCycles++;
+  return 1;
 }
