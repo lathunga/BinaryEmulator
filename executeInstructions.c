@@ -738,11 +738,11 @@ int shiftStages(struct machineState* machineState)
       {
         stall = 1;
       }
-      if(stall==0)
-      {
-        machineState->stages[1] = machineState->stages[1];
-        machineState->stages[1].type = 0;
-      }
+    }
+    if(stall==0)
+    {
+      machineState->stages[1] = machineState->stages[1];
+      machineState->stages[1].type = 0;
     }
   }
   if(machineState->stages[0].type!=0 && machineState->stages[1].type==0)
