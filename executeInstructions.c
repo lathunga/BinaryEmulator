@@ -741,7 +741,7 @@ int shiftStages(struct machineState* machineState)
     }
     if(stall==0)
     {
-      machineState->stages[1] = machineState->stages[1];
+      machineState->stages[2] = machineState->stages[1];
       machineState->stages[1].type = 0;
     }
   }
