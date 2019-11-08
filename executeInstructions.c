@@ -688,6 +688,7 @@ void hexdump(int8_t *start, size_t size)
 
 int shiftStages(struct machineState* machineState)
 {
+  struct instruction empty;
   int stall = 0;
   if((machineState->count == machineState->length || machineState->count == -1) && machineState->stages[0].type==0 && machineState->stages[1].type==0 && machineState->stages[2].type==0 && machineState->stages[3].type==0 && machineState->stages[4].type==0)
   {
@@ -695,17 +696,17 @@ int shiftStages(struct machineState* machineState)
   }
   if(machineState->stages[4].type!=0)
   {
-    machineState->stages[4].type = 0;
+    machineState->stages[4] = empty;
   }
   if(machineState->stages[3].type!=0)
   {
     machineState->stages[4] = machineState->stages[3];
-    machineState->stages[3].type = 0;
+    machineState->stages[3] = empty;
   }
   if(machineState->stages[2].type!=0)
   {
     machineState->stages[3] = machineState->stages[2];
-    machineState->stages[2].type = 0;
+    machineState->stages[2] = empty;
   }
   if(machineState->stages[1].type!=0)
   {
@@ -742,14 +743,14 @@ int shiftStages(struct machineState* machineState)
     if(stall==0)
     {
       machineState->stages[2] = machineState->stages[1];
-      machineState->stages[1].type = 0;
+      machineState->stages[1] = empty;
     }
   }
   if(machineState->stages[0].type!=0 && machineState->stages[1].type==0)
   {
 
     machineState->stages[1] = machineState->stages[0];
-    machineState->stages[0].type = 0;
+    machineState->stages[0] = empty;
   }
   if(machineState->count!=machineState->length && machineState->count!=-1 && machineState->stages[0].type==0)
   {
