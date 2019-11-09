@@ -56,5 +56,7 @@ struct machineState
   int instructionsExecuted;
 
   int unpipelinedCycles;
+
+  int dataHazards;
 };
 #endif

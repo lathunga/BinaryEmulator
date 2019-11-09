@@ -760,6 +760,10 @@ int shiftStages(struct machineState* machineState)
       machineState->stages[2] = machineState->stages[1];
       machineState->stages[1] = empty;
     }
+    else
+    {
+      machineState->dataHazards++;
+    }
   }
   if(machineState->stages[1].type==0)
   {

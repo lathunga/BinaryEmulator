@@ -58,5 +58,6 @@ int main(int argc, char *argv[])
   }
   printf("Statistics:");
   printf("  \n%s %d", "Number of cycles required on an unpipelined implementation: ", machineState->instructionsExecuted);
-  printf("  \n%s %d\n", "Number of cycles required on a pipelined implementation without bypassing or branch prediction: ", machineState->unpipelinedCycles);
+  printf("  \n%s %d", "Number of cycles required on a pipelined implementation without bypassing or branch prediction: ", machineState->unpipelinedCycles);
+  printf("  \n%s %d", "Number of data hazards on the pipelined implementation: ", machineState->dataHazards);
 }
