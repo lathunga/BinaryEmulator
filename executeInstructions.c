@@ -771,6 +771,10 @@ int shiftStages(struct machineState* machineState)
     shiftStages(machineState);
     return 1;
   }
+  if(finished.format==5 && machineState->stages[4].type!=0 && machineState->stages[3].type!=0)
+  {
+    machineState->controlHazards++;
+  }
   if(machineState->stages[1].type==0)
   {
     if(machineState->stages[0].type!=0)
