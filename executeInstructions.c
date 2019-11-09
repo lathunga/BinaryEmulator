@@ -690,7 +690,6 @@ int shiftStages(struct machineState* machineState)
 {
   struct instruction empty = {0, 0, 0, 0, 0, 0, 0};
   int stall = 0;
-  int doFetch = 0;
   if((machineState->count == machineState->length || machineState->count == -1) && machineState->stages[0].type==0 && machineState->stages[1].type==0 && machineState->stages[2].type==0 && machineState->stages[3].type==0 && machineState->stages[4].type==0)
   {
     return 0;
@@ -756,8 +755,7 @@ int shiftStages(struct machineState* machineState)
     }
     else
     {
-      doFetch = 1;
-      machineState->stages[0] = machineState->instruction;
+      machineState->stages[1] = machineState->instruction;
       machineState->unpipelinedCycles++;
       return 1;
     }
