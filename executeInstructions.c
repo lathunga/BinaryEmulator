@@ -689,6 +689,7 @@ void hexdump(int8_t *start, size_t size)
 int shiftStages(struct machineState* machineState)
 {
   struct instruction empty = {0, 0, 0, 0, 0, 0, 0};
+  struct instruction finished = {0, 0, 0, 0, 0, 0, 0};
   int stall = 0;
   if((machineState->count == machineState->length || machineState->count == -1) && machineState->stages[0].type==0 && machineState->stages[1].type==0 && machineState->stages[2].type==0 && machineState->stages[3].type==0 && machineState->stages[4].type==0)
   {
@@ -696,6 +697,7 @@ int shiftStages(struct machineState* machineState)
   }
   if(machineState->stages[4].type!=0)
   {
+    finished = machineState->stages[4];
     machineState->stages[4] = empty;
   }
   if(machineState->stages[3].type!=0)
@@ -775,6 +777,10 @@ int shiftStages(struct machineState* machineState)
     {
       machineState->stages[1] = machineState->instruction;
       machineState->unpipelinedCycles++;
+      return 1;
+    }
+    if(finished.format==5)
+    {
       return 1;
     }
     if(machineState->stages[2].format==5 || machineState->stages[3].format==5 || machineState->stages[4].format==5)
