@@ -715,14 +715,17 @@ int shiftStages(struct machineState* machineState)
       if( (machineState->stages[1].format==1 || machineState->stages[1].format==3) && (machineState->stages[1].c3==machineState->stages[4].c4 || machineState->stages[1].c1==machineState->stages[4].c4) )
       {
         stall = 1;
+        machineState->dataHazards++;
       }
       else if( ( machineState->stages[1].format==2) && (machineState->stages[1].c3==machineState->stages[4].c4))
       {
         stall = 1;
+        machineState->dataHazards++;
       }
       else if( (machineState->stages[1].format==5) && (machineState->stages[1].c4==machineState->stages[4].c4) )
       {
         stall = 1;
+        machineState->dataHazards++;
       }
     }
     if(machineState->stages[3].type==25 || machineState->stages[3].format==1 || machineState->stages[3].format==2)
@@ -759,10 +762,6 @@ int shiftStages(struct machineState* machineState)
     {
       machineState->stages[2] = machineState->stages[1];
       machineState->stages[1] = empty;
-    }
-    else
-    {
-      machineState->dataHazards++;
     }
   }
   if(machineState->stages[1].type==0)
