@@ -779,12 +779,12 @@ int shiftStages(struct machineState* machineState)
     }
     if(machineState->stages[2].format!=5 || machineState->stages[3].format!=5 || machineState->stages[4].format!=5)
     {
-      machineState->controlHazards++;
       int i;
       for(i=0; i<4; i++)
       {
         shiftStages(machineState);
       }
+      machineState->controlHazards++;
     }
   }
   if(machineState->count!=machineState->length && machineState->count!=-1 && machineState->stages[0].type==0)
