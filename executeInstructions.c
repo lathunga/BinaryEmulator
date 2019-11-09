@@ -766,16 +766,20 @@ int shiftStages(struct machineState* machineState)
   }
   if(machineState->stages[1].type==0)
   {
-    if(machineState->stages[0].type!=0)
+    if(machineState->stages[0].type!=0 && machineState->stages[2].format!=5 && machineState->stages[3].format!=5 && machineState->stages[4].format!=5)
     {
       machineState->stages[1] = machineState->stages[0];
       machineState->stages[0] = empty;
     }
-    else if(machineState->count!=machineState->length && machineState->count!=-1)
+    else if(machineState->count!=machineState->length && machineState->count!=-1 && machineState->stages[1].format!=5)
     {
       machineState->stages[1] = machineState->instruction;
       machineState->unpipelinedCycles++;
       return 1;
+    }
+    if(machineState->stages[2].format!=5 || machineState->stages[3].format!=5 || machineState->stages[4].format!=5)
+    {
+      machineState->controlHazards++;
     }
   }
   if(machineState->count!=machineState->length && machineState->count!=-1 && machineState->stages[0].type==0)

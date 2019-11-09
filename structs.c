@@ -58,5 +58,7 @@ struct machineState
   int unpipelinedCycles;
 
   int dataHazards;
+
+  int controlHazards;
 };
 #endif
