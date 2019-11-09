@@ -770,11 +770,6 @@ int shiftStages(struct machineState* machineState)
       machineState->stages[1] = empty;
     }
   }
-  if(machineState->stages[0].format==5 || machineState->stages[1].format==5)
-  {
-    shiftStages(machineState);
-    return 1;
-  }
   if(machineState->stages[1].type==0)
   {
     if(machineState->stages[0].type!=0)
@@ -793,6 +788,14 @@ int shiftStages(struct machineState* machineState)
   {
     machineState->stages[0] = machineState->instruction;
     machineState->unpipelinedCycles++;
+    if(machineState->stages[0].format!=5)
+    {
+      return 1;
+    }
+  }
+  if(machineState->stages[0].format==5 || machineState->stages[1].format==5)
+  {
+    shiftStages(machineState);
     return 1;
   }
   else
