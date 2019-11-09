@@ -766,9 +766,10 @@ int shiftStages(struct machineState* machineState)
       machineState->stages[1] = empty;
     }
   }
-  if(machineState->stages[0].format==5 || machineState->stages[1].format==5 || machineState->stages[2].format==5 || machineState->stages[3].format==5 || machineState->stages[4].format==5)
+  if(machineState->stages[0].format==5 || machineState->stages[1].format==5)
   {
     shiftStages(machineState);
+    return 1;
   }
   if(machineState->stages[1].type==0)
   {
