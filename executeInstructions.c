@@ -803,5 +803,5 @@ int shiftStages(struct machineState* machineState)
   {
     shiftStages(machineState);
   }
-  return 0;
+  return 1;
 }
