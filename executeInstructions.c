@@ -688,6 +688,7 @@ void hexdump(int8_t *start, size_t size)
 
 int shiftStages(struct machineState* machineState)
 {
+  machineState->unpipelinedCycles++;
   if(machineState->stages[3].format==5 && machineState->stages[1].type!=0 && machineState->stages[2].type==0)
   {
     machineState->controlHazards++;
