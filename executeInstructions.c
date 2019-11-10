@@ -406,7 +406,7 @@ int doDump(struct machineState* machineState)
      }
      else if(machineState->program[j].format==4)
      {
-       printf("  %s %lld\n", machineState->program[j].name, machineState->program[j].c4);
+       printf("  %s %lld\n", machineState->program[j].name, machineState->program[j].c1);
      }
      else if(machineState->program[j].format==5)
      {
