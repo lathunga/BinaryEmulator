@@ -734,7 +734,7 @@ int shiftStages(struct machineState* machineState, int init)
 
     if(machineState->stages[3].type==25 || machineState->stages[3].type==29 || machineState->stages[3].format==1 || machineState->stages[3].format==2)
     {
-      if( (machineState->stages[1].format==1) && (machineState->stages[1].c4==machineState->stages[3].c4 || machineState->stages[1].c3==machineState->stages[3].c4) )
+      if( (machineState->stages[1].format==1) && (machineState->stages[1].c3==machineState->stages[3].c4 || machineState->stages[1].c1==machineState->stages[3].c4) )
       {
         stall = 1;
         machineState->dataHazards++;
