@@ -699,6 +699,7 @@ int shiftStages(struct machineState* machineState)
   {
     return 0;
   }
+  machineState->unpipelinedCycles++;
   if(machineState->stages[4].type!=0)
   {
     finished = machineState->stages[4];
@@ -790,19 +791,16 @@ int shiftStages(struct machineState* machineState)
     else if(machineState->count!=machineState->length && machineState->count!=-1)
     {
       machineState->stages[1] = machineState->instruction;
-      machineState->unpipelinedCycles++;
       return 1;
     }
   }
   else if(machineState->count!=machineState->length && machineState->count!=-1 && machineState->stages[0].type==0)
   {
     machineState->stages[0] = machineState->instruction;
-    machineState->unpipelinedCycles++;
     return 1;
   }
   else
   {
-    machineState->unpipelinedCycles++;
     shiftStages(machineState);
   }
   return 0;
