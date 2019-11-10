@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
     machineState->instruction = machineState->program[machineState->count];
     machineState->count = doInstruction(machineState);
   }
+  machineState->count++;
   while(shiftStages(machineState)==1)
   {
 
