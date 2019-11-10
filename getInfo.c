@@ -387,7 +387,7 @@ void setVariables(int format, uint32_t newInstruction, struct instruction* progr
     if(temp == 1)
     {
       int i = 31;
-      while(i>11)
+      while(i>25)
       {
         shifted ^= (1 << i);
         i--;
