@@ -796,11 +796,6 @@ int shiftStages(struct machineState* machineState, int init)
     {
       machineState->stages[1] = machineState->stages[0];
       machineState->stages[0] = empty;
-      if(machineState->stages[1].format==5)
-      {
-        shiftStages(machineState, 1);
-        return 1;
-      }
     }
     else if(machineState->count<machineState->length && machineState->count!=-1)
     {
@@ -811,6 +806,11 @@ int shiftStages(struct machineState* machineState, int init)
   else if(machineState->count!=machineState->length && machineState->count!=-1 && machineState->stages[0].type==0 && init==0)
   {
     machineState->stages[0] = machineState->instruction;
+    return 1;
+  }
+  if(machineState->stages[1].format==5)
+  {
+    shiftStages(machineState, 1);
     return 1;
   }
   else
