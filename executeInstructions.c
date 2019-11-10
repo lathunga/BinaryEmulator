@@ -75,7 +75,7 @@ int doInstruction(struct machineState* machineState)
 int doAddi(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] + machineState->instruction.c1;
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   machineState->count++;
   machineState->instructionsExecuted++;
   return machineState->count;
@@ -84,7 +84,7 @@ int doAddi(struct machineState* machineState)
 int doAndi(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] & machineState->instruction.c1;
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   machineState->count++;
   machineState->instructionsExecuted++;
   return machineState->count;
@@ -93,7 +93,7 @@ int doAndi(struct machineState* machineState)
 int doEori(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] ^ machineState->instruction.c1;
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   machineState->count++;
   machineState->instructionsExecuted++;
   return machineState->count;
@@ -102,7 +102,7 @@ int doEori(struct machineState* machineState)
 int doOrri(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] | machineState->instruction.c1;
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   machineState->count++;
   machineState->instructionsExecuted++;
   return machineState->count;
@@ -111,7 +111,7 @@ int doOrri(struct machineState* machineState)
 int doSubi(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] - machineState->instruction.c1;
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   machineState->count++;
   machineState->instructionsExecuted++;
   return machineState->count;
@@ -120,7 +120,7 @@ int doSubi(struct machineState* machineState)
 int doSubis(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] - machineState->instruction.c1;
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   if(machineState->registers[machineState->instruction.c4]==0)
   {
     machineState->eq = 1;
@@ -167,7 +167,7 @@ int doSubis(struct machineState* machineState)
 int doAdd(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] + machineState->registers[machineState->instruction.c1];
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   machineState->count++;
   machineState->instructionsExecuted++;
   return machineState->count;
@@ -176,7 +176,7 @@ int doAdd(struct machineState* machineState)
 int doAnd(struct machineState* machineState)
 {
   machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] & machineState->registers[machineState->instruction.c1];
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   machineState->count++;
   machineState->instructionsExecuted++;
   return machineState->count;
@@ -185,7 +185,7 @@ int doAnd(struct machineState* machineState)
 int doBr(struct machineState* machineState)
 {
   machineState->count = machineState->registers[30]+1;
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   machineState->instructionsExecuted++;
   return machineState->count;
 }
@@ -193,7 +193,7 @@ int doBr(struct machineState* machineState)
 int doEor(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] ^ machineState->registers[machineState->instruction.c1];
-   shiftStages(machineState);
+   shiftStages(machineState, 0);
    machineState->count++;
    machineState->instructionsExecuted++;
    return machineState->count;
@@ -202,7 +202,7 @@ int doEor(struct machineState* machineState)
 int doLsl(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] << machineState->instruction.c2;
-   shiftStages(machineState);
+   shiftStages(machineState, 0);
    machineState->count++;
    machineState->instructionsExecuted++;
    return machineState->count;
@@ -211,7 +211,7 @@ int doLsl(struct machineState* machineState)
 int doLsr(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] >> machineState->instruction.c2;
-   shiftStages(machineState);
+   shiftStages(machineState, 0);
    machineState->count++;
    machineState->instructionsExecuted++;
    return machineState->count;
@@ -220,7 +220,7 @@ int doLsr(struct machineState* machineState)
 int doMul(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] * machineState->registers[machineState->instruction.c1];
-   shiftStages(machineState);
+   shiftStages(machineState, 0);
    machineState->count++;
    machineState->instructionsExecuted++;
    return machineState->count;
@@ -229,7 +229,7 @@ int doMul(struct machineState* machineState)
 int doOrr(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] | machineState->registers[machineState->instruction.c1];
-   shiftStages(machineState);
+   shiftStages(machineState, 0);
    machineState->count++;
    machineState->instructionsExecuted++;
    return machineState->count;
@@ -238,7 +238,7 @@ int doOrr(struct machineState* machineState)
 int doSub(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] - machineState->registers[machineState->instruction.c1];
-   shiftStages(machineState);
+   shiftStages(machineState, 0);
    machineState->count++;
    machineState->instructionsExecuted++;
    return machineState->count;
@@ -247,7 +247,7 @@ int doSub(struct machineState* machineState)
 int doSubs(struct machineState* machineState)
 {
    machineState->registers[machineState->instruction.c4] = machineState->registers[machineState->instruction.c3] - machineState->registers[machineState->instruction.c1];
-   shiftStages(machineState);
+   shiftStages(machineState, 0);
    if(machineState->registers[machineState->instruction.c4]==0)
    {
      machineState->eq = 1;
@@ -294,7 +294,7 @@ int doSubs(struct machineState* machineState)
 int doUdiv(struct machineState* machineState)
 {
   int64_t quotient = machineState->registers[machineState->instruction.c3] / machineState->registers[machineState->instruction.c1];
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   if(quotient<0)
   {
     quotient *= -1;
@@ -476,21 +476,21 @@ int doDump(struct machineState* machineState)
    printf("\n%s %d\n         %s %d\n        %s %d\n", "Extra:\n Instructions executed:", machineState->instructionsExecuted, "Loads issued:", machineState->loads, "Stores issued:", machineState->stores);
    machineState->count++;
    machineState->instructionsExecuted++;
-   shiftStages(machineState);
+   shiftStages(machineState, 0);
    return machineState->count;
 }
 
 int doHalt(struct machineState* machineState)
 {
    doDump(machineState);
-   shiftStages(machineState);
+   shiftStages(machineState, 0);
    return -1;
 }
 
 int doPrnl(struct machineState* machineState)
 {
    printf("\n");
-   shiftStages(machineState);
+   shiftStages(machineState, 0);
    machineState->count++;
    machineState->instructionsExecuted++;
    return machineState->count;
@@ -500,14 +500,14 @@ int doPrnt(struct machineState* machineState)
 {
    printf("\n%c%lld%s%x%s%lld%c", 'X', machineState->instruction.c4, ": hex(", machineState->registers[machineState->instruction.c4], ")   decimal(", machineState->registers[machineState->instruction.c4], ')');
    machineState->count++;
-   shiftStages(machineState);
+   shiftStages(machineState, 0);
    machineState->instructionsExecuted++;
    return machineState->count;
 }
 
 int doLdur(struct machineState* machineState)
 {
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   if(machineState->instruction.c3 == 28)
   {
     if(machineState->registers[28]+machineState->instruction.c1<=machineState->registers[29])
@@ -531,7 +531,7 @@ int doLdur(struct machineState* machineState)
 
 int doStur(struct machineState* machineState)
 {
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
    if(machineState->instruction.c3 == 28)
    {
      if(machineState->registers[28]+machineState->instruction.c1<=machineState->registers[29])
@@ -555,7 +555,7 @@ int doStur(struct machineState* machineState)
 
 int doB(struct machineState* machineState)
 {
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
    machineState->count = machineState->instruction.c1 + machineState->count;
    machineState->instructionsExecuted++;
    return machineState->count;
@@ -563,7 +563,7 @@ int doB(struct machineState* machineState)
 
 int doBl(struct machineState* machineState)
 {
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
    machineState->registers[30] = machineState->count;
    machineState->count = machineState->instruction.c1 + machineState->count;
    machineState->instructionsExecuted++;
@@ -572,7 +572,7 @@ int doBl(struct machineState* machineState)
 
 int doB_cond(struct machineState* machineState)
 {
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   machineState->instructionsExecuted++;
    switch(machineState->instruction.c4)
    {
@@ -611,7 +611,7 @@ int doB_cond(struct machineState* machineState)
 
 int doCbnz(struct machineState* machineState)
 {
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   if(machineState->registers[machineState->instruction.c4] != 0)
   {
     machineState->instructionsExecuted++;
@@ -628,7 +628,7 @@ int doCbnz(struct machineState* machineState)
 
 int doCbz(struct machineState* machineState)
 {
-  shiftStages(machineState);
+  shiftStages(machineState, 0);
   if(machineState->registers[machineState->instruction.c4] == 0)
   {
     machineState->instructionsExecuted++;
@@ -686,7 +686,7 @@ void hexdump(int8_t *start, size_t size)
    printf("%08x\n", (int32_t) size);
 }
 
-int shiftStages(struct machineState* machineState)
+int shiftStages(struct machineState* machineState, int init)
 {
   if(machineState->stages[3].format==5 && machineState->stages[1].type!=0 && machineState->stages[2].type==0)
   {
@@ -787,8 +787,7 @@ int shiftStages(struct machineState* machineState)
   }
   if(machineState->stages[2].format==5)
   {
-    shiftStages(machineState);
-    machineState->newInstruct=1;
+    shiftStages(machineState, 1);
     return 1;
   }
   if(machineState->stages[1].type==0)
@@ -799,28 +798,24 @@ int shiftStages(struct machineState* machineState)
       machineState->stages[0] = empty;
       if(machineState->stages[1].format==5)
       {
-        shiftStages(machineState);
-        machineState->newInstruct = 1;
+        shiftStages(machineState, 1);
         return 1;
       }
     }
-    else if(machineState->count<machineState->length && machineState->count!=-1 && machineState->newInstruct==1)
+    else if(machineState->count<machineState->length && machineState->count!=-1)
     {
       machineState->stages[1] = machineState->instruction;
-      machineState->newInstruct = 0;
       return 1;
     }
   }
-  else if(machineState->count!=machineState->length && machineState->count!=-1 && machineState->stages[0].type==0)
+  else if(machineState->count!=machineState->length && machineState->count!=-1 && machineState->stages[0].type==0 && init==0)
   {
     machineState->stages[0] = machineState->instruction;
-    machineState->newInstruct = 1;
     return 1;
   }
   else
   {
-    shiftStages(machineState);
+    shiftStages(machineState, 1);
   }
-  machineState->newInstruct = 1;
   return 1;
 }
