@@ -383,7 +383,7 @@ void setVariables(int format, uint32_t newInstruction, struct instruction* progr
   {
     mask = ((1 << 26) - 1) << 0;
     shifted = newInstruction & mask;
-    uint32_t temp = shifted >> 31;
+    uint32_t temp = shifted >> 25;
     if(temp == 1)
     {
       int i = 31;
