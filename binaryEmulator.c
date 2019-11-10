@@ -47,12 +47,12 @@ int main(int argc, char *argv[])
   machineState->loads = 0;
   machineState->stores = 0;
   machineState->instructionsExecuted = 0;
+  machineState->newInstruct = 1;
   while(machineState->count<length && machineState->count!=-1)
   {
     machineState->instruction = machineState->program[machineState->count];
     machineState->count = doInstruction(machineState);
   }
-  machineState->count++;
   while(shiftStages(machineState)==1)
   {
 

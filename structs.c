@@ -60,5 +60,7 @@ struct machineState
   int dataHazards;
 
   int controlHazards;
+
+  int newInstruct;
 };
 #endif
