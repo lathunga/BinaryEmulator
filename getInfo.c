@@ -384,7 +384,7 @@ void setVariables(int format, uint32_t newInstruction, struct instruction* progr
     mask = ((1 << 26) - 1) << 0;
     shifted = newInstruction & mask;
     program[j].c1 = shifted;
-    uint32_t temp = shifted >> 1;
+    uint32_t temp = shifted;
     printf("d", temp);
     if(temp == 1)
     {
