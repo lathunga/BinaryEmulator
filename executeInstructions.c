@@ -731,12 +731,7 @@ int shiftStages(struct machineState* machineState)
         stall = 1;
         machineState->dataHazards++;
       }
-      else if((machineState->stages[1].type==29) && (machineState->stages[1].c3==machineState->stages[4].c4 || machineState->stages[1].c1==machineState->stages[4].c4))
-      {
-        stall = 1;
-        machineState->dataHazards++;
-      }
-      else if((machineState->stages[1].type==29 && machineState->stages[4].type==25) && (machineState->stages[1].c3==machineState->stages[4].c1))
+      else if((machineState->stages[1].type==29) && (machineState->stages[1].c4==machineState->stages[4].c4 || machineState->stages[1].c3==machineState->stages[4].c4))
       {
         stall = 1;
         machineState->dataHazards++;
@@ -756,12 +751,7 @@ int shiftStages(struct machineState* machineState)
         stall = 1;
         machineState->dataHazards++;
       }
-      else if((machineState->stages[1].type==29) && (machineState->stages[1].c3==machineState->stages[3].c4 || machineState->stages[1].c1==machineState->stages[3].c4))
-      {
-        stall = 1;
-        machineState->dataHazards++;
-      }
-      else if((machineState->stages[1].type==29 && machineState->stages[3].type==25) && (machineState->stages[1].c3==machineState->stages[3].c1))
+      else if((machineState->stages[1].type==29) && (machineState->stages[1].c4==machineState->stages[3].c4 || machineState->stages[1].c3==machineState->stages[3].c4))
       {
         stall = 1;
         machineState->dataHazards++;
@@ -781,12 +771,7 @@ int shiftStages(struct machineState* machineState)
         stall = 1;
         machineState->dataHazards++;
       }
-      else if((machineState->stages[1].type==29) && (machineState->stages[1].c3==machineState->stages[2].c4 || machineState->stages[1].c1==machineState->stages[2].c4))
-      {
-        stall = 1;
-        machineState->dataHazards++;
-      }
-      else if((machineState->stages[1].type==29 && machineState->stages[2].type==25) && (machineState->stages[1].c3==machineState->stages[2].c1))
+      else if((machineState->stages[1].type==29) && (machineState->stages[1].c4==machineState->stages[2].c4 || machineState->stages[1].c3==machineState->stages[2].c4))
       {
         stall = 1;
         machineState->dataHazards++;
