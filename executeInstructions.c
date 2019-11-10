@@ -802,7 +802,7 @@ int shiftStages(struct machineState* machineState)
         return 1;
       }
     }
-    else if(machineState->count!=machineState->length && machineState->count!=-1)
+    else if(machineState->count!=machineState->length+1 && machineState->count!=-1)
     {
       machineState->stages[1] = machineState->instruction;
       return 1;
