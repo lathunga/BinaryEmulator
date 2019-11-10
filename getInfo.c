@@ -332,7 +332,6 @@ void setVariables(int format, uint32_t newInstruction, struct instruction* progr
     shifted = newInstruction & mask;
     shifted = shifted >> 10;
     uint32_t temp = shifted >> 11;
-    printf("%u", temp);
     if(temp == 1)
     {
       int i = 31;
@@ -385,6 +384,17 @@ void setVariables(int format, uint32_t newInstruction, struct instruction* progr
     mask = ((1 << 26) - 1) << 0;
     shifted = newInstruction & mask;
     program[j].c1 = shifted;
+    uint32_t temp = shifted >> 1;
+    if(temp == 1)
+    {
+      int i = 31;
+      while(i>11)
+      {
+        shifted ^= (1 << i);
+        i--;
+      }
+    }
+    program[j].c1 = (int32_t) shifted;
 
     program[j].c2 = 0;
 
