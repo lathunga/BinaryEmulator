@@ -688,6 +688,7 @@ void hexdump(int8_t *start, size_t size)
 
 int shiftStages(struct machineState* machineState)
 {
+  machineState->unpipelinedCycles++;
   if(machineState->stages[3].format==5 && machineState->stages[1].type!=0 && machineState->stages[2].type==0)
   {
     machineState->controlHazards++;
@@ -770,7 +771,7 @@ int shiftStages(struct machineState* machineState)
       machineState->stages[1] = empty;
     }
   }
-  if(machineState->stages[1].format==5 || machineState->stages[2].format==5)
+  if(machineState->stages[2].format==5)
   {
     shiftStages(machineState);
     return 1;
@@ -781,7 +782,7 @@ int shiftStages(struct machineState* machineState)
     {
       machineState->stages[1] = machineState->stages[0];
       machineState->stages[0] = empty;
-      if(machineState->stages[1].format==5 || machineState->stages[2].format==5)
+      if(machineState->stages[1].format==5)
       {
         shiftStages(machineState);
         return 1;
@@ -790,19 +791,16 @@ int shiftStages(struct machineState* machineState)
     else if(machineState->count!=machineState->length && machineState->count!=-1)
     {
       machineState->stages[1] = machineState->instruction;
-      machineState->unpipelinedCycles++;
       return 1;
     }
   }
   else if(machineState->count!=machineState->length && machineState->count!=-1 && machineState->stages[0].type==0)
   {
     machineState->stages[0] = machineState->instruction;
-    machineState->unpipelinedCycles++;
     return 1;
   }
   else
   {
-    machineState->unpipelinedCycles++;
     shiftStages(machineState);
   }
   return 1;
