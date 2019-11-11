@@ -503,7 +503,8 @@ int doLdur(struct machineState* machineState)
   shiftStages(machineState, 0);
   if(machineState->instruction.c3 == 28)
   {
-    if(machineState->registers[28]+machineState->instruction.c1<=machineState->registers[29])
+    // if(machineState->registers[28]+machineState->instruction.c1<=machineState->registers[29])
+    if(machineState->instruction.c3==28)
     {
       machineState->registers[machineState->instruction.c4] = machineState->stack[(machineState->registers[28]/8) + (machineState->instruction.c1/8)];
     }
@@ -528,7 +529,7 @@ int doStur(struct machineState* machineState)
    if(machineState->instruction.c3 == 28)
    {
      // if(machineState->registers[28]+machineState->instruction.c1<=machineState->registers[29])
-     if(machineState->registers[28])
+     if(machineState->instruction.c3==28)
      {
        machineState->stack[(machineState->registers[28]/8) + (machineState->instruction.c1/8)] = machineState->registers[machineState->instruction.c4];
      }
