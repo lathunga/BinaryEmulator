@@ -62,5 +62,5 @@ int main(int argc, char *argv[])
   printf("  \n%s %d", "Number of cycles required on a pipelined implementation without bypassing or branch prediction: ", machineState->unpipelinedCycles);
   printf("  \n%s %d", "Number of data hazards on the pipelined implementation: ", machineState->dataHazards/2);
   printf("  \n%s %d", "Number of control hazards on the pipelined implementation: ", machineState->controlHazards);
-  printf("\n%s %d\n", "Number of cycles required on a pipelined implementation with bypassing: ", machineState->unpipelinedCycles+machineState->dataHazards);
+  printf("\n%s %d\n", "Number of cycles required on a pipelined implementation with bypassing: ", machineState->unpipelinedCycles-machineState->dataHazards);
 }
