@@ -503,8 +503,7 @@ int doLdur(struct machineState* machineState)
   shiftStages(machineState, 0);
   if(machineState->instruction.c3 == 28)
   {
-    // if(machineState->registers[28]+machineState->instruction.c1<=machineState->registers[29])
-    if(machineState->instruction.c3==28)
+    if(machineState->registers[28]+machineState->instruction.c1<=machineState->registers[29])
     {
       machineState->registers[machineState->instruction.c4] = machineState->stack[(machineState->registers[28]/8) + (machineState->instruction.c1/8)];
     }
@@ -515,7 +514,7 @@ int doLdur(struct machineState* machineState)
   }
   else
   {
-    machineState->registers[machineState->instruction.c4] = machineState->mainMemory[(machineState->instruction.c1 + machineState->registers[machineState->instruction.c3])/8];
+    machineState->registers[machineState->instruction.c4] = machineState->mainMemory[(machineState->instruction.c1/8) + (machineState->registers[machineState->instruction.c3]/8)];
   }
   machineState->count++;
   machineState->loads++;
@@ -528,8 +527,7 @@ int doStur(struct machineState* machineState)
   shiftStages(machineState, 0);
    if(machineState->instruction.c3 == 28)
    {
-     // if(machineState->registers[28]+machineState->instruction.c1<=machineState->registers[29])
-     if(machineState->instruction.c3==28)
+     if(machineState->registers[28]+machineState->instruction.c1<=machineState->registers[29])
      {
        machineState->stack[(machineState->registers[28]/8) + (machineState->instruction.c1/8)] = machineState->registers[machineState->instruction.c4];
      }
@@ -540,7 +538,7 @@ int doStur(struct machineState* machineState)
    }
    else
    {
-     machineState->mainMemory[(machineState->instruction.c1 + machineState->registers[machineState->instruction.c3])/8] = machineState->registers[machineState->instruction.c4];
+     machineState->mainMemory[(machineState->instruction.c1/8) + (machineState->registers[machineState->instruction.c3]/8)] = machineState->registers[machineState->instruction.c4];
    }
    machineState->count++;
    machineState->stores++;
