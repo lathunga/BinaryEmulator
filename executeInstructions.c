@@ -184,8 +184,8 @@ int doAnd(struct machineState* machineState)
 
 int doBr(struct machineState* machineState)
 {
-  machineState->count = machineState->registers[30]+1;
   shiftStages(machineState, 0);
+  machineState->count = machineState->registers[machineState->instruction.c3];
   machineState->instructionsExecuted++;
   return machineState->count;
 }
@@ -557,10 +557,11 @@ int doB(struct machineState* machineState)
 int doBl(struct machineState* machineState)
 {
   shiftStages(machineState, 0);
-   machineState->registers[30] = machineState->count;
-   machineState->count = machineState->instruction.c1 + machineState->count;
-   machineState->instructionsExecuted++;
-   return machineState->count;
+  machineState->count++;
+  machineState->registers[30] = machineState->count;
+  machineState->count = machineState->instruction.c1 + machineState->count;
+  machineState->instructionsExecuted++;
+  return machineState->count;
 }
 
 int doB_cond(struct machineState* machineState)
