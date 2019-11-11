@@ -491,7 +491,7 @@ int doPrnl(struct machineState* machineState)
 
 int doPrnt(struct machineState* machineState)
 {
-   printf("\n%c%lld%s%x%s%lld%c", 'X', machineState->instruction.c4, ": hex(", machineState->registers[machineState->instruction.c4], ")   decimal(", machineState->registers[machineState->instruction.c4], ')');
+   printf("\n%s%lld: 0x%016llx (%lld%)", "X", machineState->instruction.c4, machineState->registers[machineState->instruction.c4], machineState->registers[machineState->instruction.c4]);
    machineState->count++;
    shiftStages(machineState, 0);
    machineState->instructionsExecuted++;
