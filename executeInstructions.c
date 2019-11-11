@@ -1,4 +1,4 @@
-machineState->//uint8_t
+//machineState->//uint8_t
 //*((uint64_t)(mem+address))
 
 #include <ctype.h>
