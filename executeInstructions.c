@@ -389,7 +389,7 @@ int doDump(struct machineState* machineState)
        }
        else if(machineState->program[j].type==9)
        {
-         printf("  %s %s%lld", machineState->program[j].name, "X", machineState->program[j].c3);
+         printf("  %s %s%lld\n", machineState->program[j].name, "X", machineState->program[j].c3);
        }
        else
        {
@@ -557,8 +557,7 @@ int doB(struct machineState* machineState)
 int doBl(struct machineState* machineState)
 {
   shiftStages(machineState, 0);
-  machineState->count++;
-  machineState->registers[30] = machineState->count;
+  machineState->registers[30] = machineState->count+1;
   machineState->count = machineState->instruction.c1 + machineState->count;
   machineState->instructionsExecuted++;
   return machineState->count;
