@@ -1,4 +1,4 @@
-//uint8_t
+machineState->//uint8_t
 //*((uint64_t)(mem+address))
 
 #include <ctype.h>
@@ -638,9 +638,24 @@ int doCbz(struct machineState* machineState)
 
 int branchIf(int flag, struct machineState* machineState)
 {
+  machineState->eq=0;
+  machineState->ge=0;
+  machineState->gt=0;
+  machineState->hi=0;
+  machineState->hs=0;
+  machineState->le=0;
+  machineState->lo=0;
+  machineState->ls=0;
+  machineState->lt=0;
+  machineState->mi=0;
+  machineState->ne=0;
+  machineState->pl=0;
+  machineState->vc=1;
+  machineState->vs=1;
    if(flag==1)
    {
      machineState->count = machineState->instruction.c1 + machineState->count;
+
      return machineState->count;
    }
    machineState->count++;
