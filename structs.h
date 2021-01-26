@@ -1,2 +1,0 @@
-struct instruction;
-struct machineState;
